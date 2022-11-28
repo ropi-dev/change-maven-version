@@ -1,0 +1,28 @@
+name: Change Maven Version
+description: Change the version of the currently checked out maven project
+inputs:
+  version:
+    description: Specific version to set. If no value is given, the version will be bumped to the next patch version.
+    required: false
+  suffix:
+    description: Desired suffix to add to the bumped version. Ignored if \'version\' is set.
+    required: false
+outputs:
+  version:
+    description: Resulting version.
+    value: "asd"
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      name: "Set version to: ${{ inputs.version }}"
+      if: ${{ inputs.version }}
+      run: echo version=${{ inputs.version }} >> $GITHUB_ENV
+    - shell: bash
+      name: "Find next version"
+      if: ${{ !inputs.version }}
+      run: echo "version=$(bump-version.sh)" >> $GITHUB_ENV
+    - shell: bash
+      name: "Print new version"
+      run: echo ${{ env.version }}
+        
