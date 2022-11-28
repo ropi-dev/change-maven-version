@@ -10,7 +10,7 @@ inputs:
 outputs:
   version:
     description: Resulting version.
-    value: "asd"
+    value: ${{ env.version }}
 runs:
   using: composite
   steps:
@@ -23,6 +23,6 @@ runs:
       if: ${{ !inputs.version }}
       run: echo "version=$(${{github.action_path}}/bump-version.sh)" >> $GITHUB_ENV
     - shell: bash
-      name: "Print new version"
-      run: echo ${{ env.version }}
+      name: "Set new version"
+      run: ./mvnw org.codehaus.mojo:versions-maven-plugin:2.13.0:set -DnewVersion=${{ env.version }}
         
