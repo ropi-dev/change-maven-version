@@ -21,7 +21,7 @@ runs:
     - shell: bash
       name: "Find next version"
       if: ${{ !inputs.version }}
-      run: echo "version=$(bump-version.sh)" >> $GITHUB_ENV
+      run: echo "version=$(${{github.action_path}}/bump-version.sh)" >> $GITHUB_ENV
     - shell: bash
       name: "Print new version"
       run: echo ${{ env.version }}
