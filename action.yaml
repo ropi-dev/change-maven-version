@@ -21,6 +21,8 @@ runs:
     - shell: bash
       name: "Find next version"
       if: ${{ !inputs.version }}
+      env:
+        SUFFIX: ${{ inputs.suffix }}
       run: echo "version=$(${{github.action_path}}/bump-version.sh)" >> $GITHUB_ENV
     - shell: bash
       name: "Set new version"
