@@ -7,6 +7,9 @@ inputs:
   suffix:
     description: Desired suffix to add to the bumped version. Ignored if \'version\' is set.
     required: false
+  previousVersion:
+    description: Version, from which the next version should be derived from. If empty, the current maven version will be used.
+    required: false
 outputs:
   version:
     description: Resulting version.
